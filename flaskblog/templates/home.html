@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+	{% for post in posts %}
+		<article class="media content-section">
+			<img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' +     
+			post.author.image_file) }}">
+		  <div class="media-body">
+		    <div class="article-metadata">
+		      <a class="mr-2" href="#">{{ post.author.username }}</a>
+		      <small class="text-muted">{{ post.date_posted.strftime('%d-%m-%Y') }}</small>
+				<div class="likeButton">
+					
+					{% if current_user.is_authenticated %}
+						{% if current_user.has_liked_post(post) %}
+							<form method="post" action="{{ url_for('like_action', post_id=post.id, action='unlike') }}">
+								<button type="submit" class="btn btn-primary btn-sm">Unlike</button>
+							</form>					
+						{% else %}
+							<form method="POST" action="{{ url_for('like_action', post_id=post.id, action='like') }}">
+								<button type="submit" class="btn btn-primary btn-sm">Like</button>
+							</form>
+						{% endif %}
+					{% else %}
+					<form action="{{ url_for('login') }}">
+						<button type="submit" class="btn btn-primary btn-sm">Like</button>
+					</form>
+					{% endif %}
+					
+				</div>
+				<div class="likeText">
+					{% if post.likes.count() == 1 %} {{ post.likes.count() }} Like
+					{% else %}
+						{{ post.likes.count() }} Likes
+					{% endif %}
+				</div>
+				
+				
+		
+				
+			</div>
+				
+		    
+		    <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }} ">{{ post.title }}</a></h2>
+		    <p class="article-content">{{ post.content }}</p>
+		    <p class="article-content">
+			{% if current_user.is_authenticated %}
+				<h5>Comment Section:</h5>
+				<form action="{{ url_for('comment_post', post_id=post.id) }}">
+					<button type="submit" class="btn btn-primary btn-sm commentBtn">Comment</button>
+				</form>
+			{% else %}
+				<h5>Comment Section:</h5>
+				<form action="{{ url_for('new_post') }}">
+					<button type="submit" class="btn btn-primary btn-sm commentBtn">Comment</button>
+				</form>
+			{% endif %}
+			    {% for comment in comments %}
+			    	{% if comment.post_id == post.id %}
+				    	<small class="text-muted">{{ comment.date_posted.strftime('%d-%m-%Y') }}</small>
+				  		<div>
+				  			<img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' +     
+							comment.author.image_file) }}">
+						  <div class="media-body">
+						    <div class="article-metadata">
+						      <a class="mr-2" href="#">{{ comment.author.username }}</a>
+				  			{{ comment.comment }}
+				  			{% if current_user == comment.author %}
+				  				<button id="delete1">
+				  					<a href="{{ url_for('delete_comment', comment_id=comment.id) }}">Delete</a>
+				  				</button>
+				  			{% endif %}
+				  		</div>
+				  	{% endif %}
+			  	{% endfor %}
+		    </p>
+		  </div>
+
+	
+		</article>
+
+		
+
+
+	{% endfor %}
+{% endblock content %}

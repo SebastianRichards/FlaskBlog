@@ -1,0 +1,209 @@
+body {
+  background: #fafafa;
+  color: #333333;
+  margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+.bg-steel {
+  background-color: #111E6C;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #444444;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+h5 {
+  color: #007BFF;
+}
+
+#delete1 {
+  float: right;
+}
+
+#button2 {
+  float: right;
+}
+
+.movingtextright {
+  position: relative; margin-left: 15px; 
+}
+
+.lotsofposts {
+  margin: auto;
+  padding-left: 30%;
+}
+
+.srlogoimage {
+  height: 31%;
+  width: 31%;
+}
+
+.moveitmoreright {
+  margin-left: 65%;
+}
+
+.moveitright {
+  margin-left: 11%;
+}
+
+.likeBtn {
+  position: relative;
+  right: 21%;
+  
+
+  
+}
+
+
+
+.likeCount {
+  position: relative;
+  right: 50%;
+}
+
+.likeButton {
+  position: relative;
+  left: 92%;
+  margin-top: -4%;
+  
+}
+
+.likeText {
+  font-size: 75%;
+  color: #007BFF;
+  position: absolute;
+  
+  margin-top: -3%;
+  left: 84%;
+}
+
+@media only screen and (max-width: 1200px) {
+  .likeText {
+    
+    left: 82%;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .likeText {
+    
+    left: 80%;
+  }
+
+  .pictureForm {
+    margin-left: 15%;
+  }
+}
+
+@media only screen and (max-width: 766px) {
+  .likeText {
+    
+    left: 78%;
+  }
+}
+
+
+
+
+
+@media only screen and (min-width: 992px) {
+  .pictureForm {
+    position: absolute;
+    left: 62%;
+    margin-top: 1%;
+  }
+
+  .commentBtn {
+  
+    margin-left: 87%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .mobileResponsive {
+    position: relative;
+    margin-left: -1%;
+  
+  }
+
+  .likeButton {
+    position: static;
+    margin-top: 3%;
+  }
+
+  .likeText {
+    left: 72%;
+    margin-top: -5%;
+  }
+
+  
+
+}
+
