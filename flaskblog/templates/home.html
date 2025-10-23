@@ -66,8 +66,8 @@
 						      <a class="mr-2" href="#">{{ comment.author.username }}</a>
 				  			{{ comment.comment }}
 				  			{% if current_user == comment.author %}
-				  				<button id="delete1">
-				  					<a href="{{ url_for('delete_comment', comment_id=comment.id) }}">Delete</a>
+				  				<button class="btn btn-danger btn-sm m-1" id="delete1">
+				  					<a style="color: white;" href="{{ url_for('delete_comment', comment_id=comment.id) }}">Delete</a>
 				  				</button>
 				  			{% endif %}
 				  		</div>
