@@ -10,6 +10,13 @@
 	    </div>
 	  </div>
 	</div>
+	
+	{% if is_guest %}
+		<div class="alert alert-info" role="alert">
+			<strong>Guest Account:</strong> Account editing is not available for guest users.
+		</div>
+	{% endif %}
+	
 		<form method="POST" action="" enctype="multipart/form-data">
 			{{ form.hidden_tag() }}
 			<fieldset class="form-group">
@@ -17,7 +24,7 @@
 				<div class="form-group">
 					{{ form.username.label(class="form-control-label") }}
 					{% if form.username.errors %}
-						{{ form.username(class="form-control form-control-lg is-invalid") }}
+						{{ form.username(class="form-control form-control-lg is-invalid", disabled=is_guest) }}
 						<div class="invalid-feedback">
 							{% for errors in form.username.errors %}
 								<span>{{ error }}</span>
@@ -25,13 +32,13 @@
 						</div>
 
 					{% else %}
-						{{ form.username(class="form-control form-control-lg")}}
+						{{ form.username(class="form-control form-control-lg", disabled=is_guest)}}
 					{% endif %}
 				</div>
 				<div class="form-group">
 					{{ form.email.label(class="form-control-label") }}
 					{% if form.email.errors %}
-						{{ form.email(class="form-control form-control-lg is-invalid") }}
+						{{ form.email(class="form-control form-control-lg is-invalid", disabled=is_guest) }}
 						<div class="invalid-feedback">
 							{% for error in form.email.errors %}
 								<span>{{ error }}</span>
@@ -39,14 +46,14 @@
 						</div>
 
 					{% else %}
-						{{ form.email(class="form-control form-control-lg")}}
+						{{ form.email(class="form-control form-control-lg", disabled=is_guest)}}
 					{% endif %}
 				</div>
 			</div>
 
 		<div class="form-group pictureForm">
 					{{ form.picture.label() }}
-					{{ form.picture(class="form-control-file") }}
+					{{ form.picture(class="form-control-file", disabled=is_guest) }}
 					{% if form.picture.errors %}
 						{% for error in form.picture.errors %}
 							<span class="text-danger">{{ error }}</span>
@@ -56,7 +63,11 @@
 		</div>
 		</fieldset>
 		<div class="form-group">
-			{{ form.submit(class="btn btn-outline-info") }}
+			{% if not is_guest %}
+				{{ form.submit(class="btn btn-outline-info") }}
+			{% else %}
+				<button type="button" class="btn btn-secondary" disabled>Update</button>
+			{% endif %}
 		</div>
 
 		</form>

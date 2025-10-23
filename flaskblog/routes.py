@@ -88,7 +88,8 @@ def save_picture(form_picture):
 @login_required
 def account():
 	form = UpdateAccountForm()
-	if form.validate_on_submit():
+	is_guest = current_user.username == 'Guest User'
+	if form.validate_on_submit() and not is_guest:
 		if form.picture.data:
 			picture_file = save_picture(form.picture.data)
 			current_user.image_file = picture_file
@@ -98,10 +99,13 @@ def account():
 		flash('your account has been updated', 'success')
 		return redirect(url_for('account'))
 	elif request.method == 'GET':
-		form.username.data = current_user.email
-		form.username.email = current_user.email
+		form.username.data = current_user.username
+		form.email.data = current_user.email
+	elif is_guest and request.method == 'POST':
+		flash('Account editing is not available for guest users', 'info')
+	
 	image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-	return render_template('account.html', title='Account', image_file=image_file, form=form)
+	return render_template('account.html', title='Account', image_file=image_file, form=form, is_guest=is_guest)
 
 
 @app.route('/post/new', methods=['GET', 'POST'])
