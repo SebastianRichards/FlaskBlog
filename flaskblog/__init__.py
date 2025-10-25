@@ -6,7 +6,7 @@ import os
 
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/blog/static')
 app.config['SECRET_KEY'] = 'b83887e39f9645a578b9697b9fd62cd8'
 
 # Use environment variable for database URL, fallback to local for development
