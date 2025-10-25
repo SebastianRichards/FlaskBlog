@@ -13,18 +13,21 @@ app.config['SECRET_KEY'] = 'b83887e39f9645a578b9697b9fd62cd8'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql://localhost/sebastianrichards_db')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['APPLICATION_ROOT'] = '/blog'
 
-class PrefixMiddleware(object):
-    def __init__(self, app, prefix=''):
-        self.app = app
-        self.prefix = prefix
+# Only add /blog prefix and middleware in production
+if os.environ.get('FLASK_ENV') == 'production':
+    app.config['APPLICATION_ROOT'] = '/blog'
+    
+    class PrefixMiddleware(object):
+        def __init__(self, app, prefix=''):
+            self.app = app
+            self.prefix = prefix
 
-    def __call__(self, environ, start_response):
-        environ['SCRIPT_NAME'] = self.prefix
-        return self.app(environ, start_response)
+        def __call__(self, environ, start_response):
+            environ['SCRIPT_NAME'] = self.prefix
+            return self.app(environ, start_response)
 
-app.wsgi_app = PrefixMiddleware(app.wsgi_app, prefix='/blog')
+    app.wsgi_app = PrefixMiddleware(app.wsgi_app, prefix='/blog')
 
 
 
