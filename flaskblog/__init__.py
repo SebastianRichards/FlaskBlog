@@ -7,7 +7,8 @@ from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'b83887e39f9645a578b9697b9fd62cd8'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/sebastianrichards_db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 
