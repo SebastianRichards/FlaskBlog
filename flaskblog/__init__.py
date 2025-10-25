@@ -4,7 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 import os
 
-
+isProduction = True
 
 app = Flask(__name__)  
 app.config['SECRET_KEY'] = 'b83887e39f9645a578b9697b9fd62cd8'
@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgres
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Only add /blog prefix and middleware in production
-if os.environ.get('FLASK_ENV') == 'production':
+if isProduction == True:
     app.config['APPLICATION_ROOT'] = '/blog'
     
     class PrefixMiddleware(object):
